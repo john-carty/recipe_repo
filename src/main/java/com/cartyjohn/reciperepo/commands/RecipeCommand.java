@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 
-public class RecipeCommand implements Serializable {
+public class RecipeCommand {
 
     private long id;
 

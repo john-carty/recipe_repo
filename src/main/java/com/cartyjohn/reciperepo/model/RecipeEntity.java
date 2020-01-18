@@ -41,7 +41,15 @@ public class RecipeEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<IngredientEntity> ingredients = new HashSet<>();
 
+    public RecipeEntity(){}
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;

@@ -1,48 +1,43 @@
-package com.cartyjohn.reciperepo.model;
+package com.cartyjohn.reciperepo.commands;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
-@Entity(name="recipes")
-public class RecipeEntity implements Serializable {
 
-    //private List<String> ingredients;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RecipeCommand implements Serializable {
+
+    private List<String> ingredients;
+
     private long id;
 
-    @Column(nullable= false)
     private String description;
 
-    @Column(nullable = false)
     private String instructions;
 
-    @Column(nullable = false)
     private String readyTime;
 
-    @Column(nullable = false)
     private String occasion = "";
 
-    @Column(nullable = false)
     private boolean isHealthy;
-    @Column(nullable = false)
     private boolean isGlutenFree;
-    @Column(nullable = false)
     private boolean isVegan;
-    @Column(nullable = false)
     private boolean isKeto;
     // add comments
     // add User
-    @Column(nullable = false)
-    private float rating = 0.0f;
+    private float rating;
 
+    public RecipeCommand() {
+    }
 
+    public List<String> getIngredients() {
+        return ingredients;
+    }
 
-//    public List<String> getIngredients() {
-//        return ingredients;
-//    }
-
-//    s
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public String getDescription() {
         return description;

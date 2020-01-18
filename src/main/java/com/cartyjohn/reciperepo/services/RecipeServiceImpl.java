@@ -3,6 +3,7 @@ package com.cartyjohn.reciperepo.services;
 import com.cartyjohn.reciperepo.commands.RecipeCommand;
 import com.cartyjohn.reciperepo.model.RecipeEntity;
 import com.cartyjohn.reciperepo.repositories.RecipeRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,10 +31,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     }
 
+    // Convert to and save RecipeEntity to db
     @Override
     @Transactional
     public RecipeCommand saveRecipeCommand(RecipeCommand command) {
-    return new RecipeCommand();
+        ModelMapper modelMapper = new ModelMapper();
+        RecipeEntity recipeToSave = modelMapper.map(command, RecipeEntity.class);
+        RecipeEntity savedRecipe = recipeRepository.save(recipeToSave);
+        return modelMapper.map(savedRecipe, RecipeCommand.class);
     }
 
 

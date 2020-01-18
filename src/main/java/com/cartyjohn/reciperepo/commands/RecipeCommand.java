@@ -1,14 +1,9 @@
 package com.cartyjohn.reciperepo.commands;
-
-
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 
 public class RecipeCommand implements Serializable {
-
-    private List<String> ingredients;
 
     private long id;
 
@@ -27,17 +22,11 @@ public class RecipeCommand implements Serializable {
     // add comments
     // add User
     private float rating;
-
+    private Set<IngredientCommand> ingredients;
     public RecipeCommand() {
     }
 
-    public List<String> getIngredients() {
-        return ingredients;
-    }
 
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-    }
 
     public String getDescription() {
         return description;
@@ -109,5 +98,21 @@ public class RecipeCommand implements Serializable {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Set<IngredientCommand> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<IngredientCommand> ingredients) {
+        this.ingredients = ingredients;
     }
 }

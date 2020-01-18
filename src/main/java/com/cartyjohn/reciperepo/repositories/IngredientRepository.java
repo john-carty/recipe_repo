@@ -1,4 +1,8 @@
 package com.cartyjohn.reciperepo.repositories;
 
-public interface IngredientRepository {
+import com.cartyjohn.reciperepo.model.IngredientEntity;
+import org.springframework.data.repository.CrudRepository;
+
+public interface IngredientRepository extends CrudRepository<IngredientEntity, Long> {
+
 }

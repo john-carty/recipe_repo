@@ -2,6 +2,8 @@ package com.cartyjohn.reciperepo.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name="recipes")
 public class RecipeEntity implements Serializable {
@@ -36,13 +38,10 @@ public class RecipeEntity implements Serializable {
     @Column(nullable = false)
     private float rating = 0.0f;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<IngredientEntity> ingredients = new HashSet<>();
 
 
-//    public List<String> getIngredients() {
-//        return ingredients;
-//    }
-
-//    s
 
     public String getDescription() {
         return description;
@@ -114,5 +113,15 @@ public class RecipeEntity implements Serializable {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+
+
+    public Set<IngredientEntity> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<IngredientEntity> ingredients) {
+        this.ingredients = ingredients;
     }
 }

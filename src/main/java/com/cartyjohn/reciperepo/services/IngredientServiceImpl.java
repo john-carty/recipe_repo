@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class IngredientServiceImpl implements IngredientService {
@@ -25,11 +26,12 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     @Transactional
-    public IngredientCommand saveIngredientCommand(IngredientCommand command) throws Exception{
+    public IngredientCommand saveIngredientCommand(IngredientCommand command){
         ModelMapper modelMapper = new ModelMapper();
         Optional<RecipeEntity> recipeOptional = recipeRepository.findById(command.getRecipeId());
         if(!recipeOptional.isPresent()){
-            throw new NotFoundException("Recipe id not found for recipe id: " +    command.getRecipeId());
+            // todo create NotFound Exception
+            throw new RuntimeException("Recipe id not found for recipe id: " +    command.getRecipeId());
         }
         else{
             // get recipe
@@ -68,9 +70,10 @@ public class IngredientServiceImpl implements IngredientService {
                     break;
                 }
             }
-            if(savedIngredient == null)
-                throw new NotFoundException("Saved Ingredient Not found");
-
+            if(savedIngredient == null) {
+                // todo create NOtFoundException
+                throw new RuntimeException("Saved Ingredient Not found");
+            }
             return modelMapper.map(savedIngredient, IngredientCommand.class);
 
         }
@@ -80,4 +83,11 @@ public class IngredientServiceImpl implements IngredientService {
     public void deleteById(Long recipeId, Long ingredientId) {
 
     }
+
+    @Override
+    public IngredientCommand findIngredientCommandById(Long recipeId) {
+        return null;
+    }
+
+
 }

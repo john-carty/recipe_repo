@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity(name="recipes")
 public class RecipeEntity implements Serializable {
 
+    private static final long serialVersionUID = 375638467013305698L;
     //private List<String> ingredients;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

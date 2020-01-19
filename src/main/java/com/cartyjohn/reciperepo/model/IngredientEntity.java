@@ -3,9 +3,10 @@ package com.cartyjohn.reciperepo.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name="ingredient")
+@Entity(name="ingredients")
 public class IngredientEntity implements Serializable {
 
+    private static final long serialVersionUID = 8342089103468789613L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

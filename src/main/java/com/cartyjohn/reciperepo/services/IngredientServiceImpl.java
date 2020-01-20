@@ -1,6 +1,7 @@
 package com.cartyjohn.reciperepo.services;
 
 import com.cartyjohn.reciperepo.commands.IngredientCommand;
+import com.cartyjohn.reciperepo.commands.RecipeCommand;
 import com.cartyjohn.reciperepo.model.IngredientEntity;
 import com.cartyjohn.reciperepo.model.RecipeEntity;
 import com.cartyjohn.reciperepo.repositories.IngredientRepository;
@@ -87,6 +88,37 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public IngredientCommand findIngredientCommandById(Long recipeId) {
         return null;
+    }
+
+    @Override
+    public IngredientCommand findByRecipeAndIngredientId(Long recipeId, Long ingredientId) {
+
+        // Find recipeEntity, if not null, find the ingredient
+        Optional<RecipeEntity> recipeOptional = recipeRepository.findById(recipeId);
+        RecipeEntity recipeEntity = null;
+        if(!recipeOptional.isPresent()){
+            // throw error here
+            System.out.println("recipe not found");
+        }
+        else{
+            recipeEntity = recipeOptional.get();
+        }
+        //find and return the ingredient
+        IngredientEntity ingredientEntity = null;
+        for(IngredientEntity ingredient : recipeEntity.getIngredients()){
+            if(ingredient.getId() == ingredientId){
+                ingredientEntity = ingredient;
+                break;
+            }
+        }
+        if(ingredientEntity == null){
+            System.out.println("Not found - ingredient");
+            throw new RuntimeException("Ingredient not found");
+            // todo implement better exception
+        }
+
+        // convert and return
+        return new ModelMapper().map(ingredientEntity, IngredientCommand.class);
     }
 
 

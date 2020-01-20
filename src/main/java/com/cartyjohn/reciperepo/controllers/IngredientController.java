@@ -1,6 +1,7 @@
 package com.cartyjohn.reciperepo.controllers;
 
 import com.cartyjohn.reciperepo.commands.IngredientCommand;
+import com.cartyjohn.reciperepo.commands.RecipeCommand;
 import com.cartyjohn.reciperepo.services.IngredientService;
 import com.cartyjohn.reciperepo.services.RecipeService;
 import org.springframework.stereotype.Controller;
@@ -29,18 +30,36 @@ public class IngredientController {
     // show one ingredient
     @GetMapping("/recipe/{recipeId}/ingredient/{ingredientId}")
     public String showIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId, Model model){
-        model.addAttribute("ingredient", ingredientService.findByRecipeAndIngredientId());
+        model.addAttribute("ingredient", ingredientService.findByRecipeAndIngredientId(recipeId, ingredientId));
         return "recipe/ingredient/show";
     }
 
-    // update a recipe ingredient - need to show update form
-    // post a new ingredient - need to show form
-    // post/save a new ingredient - no form
+    // Make a new recipe ingredient - need to show form
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+        public String createIngredient(@PathVariable Long recipeId, Model model){
+        RecipeCommand recipeCommand = recipeService.findById(recipeId);
 
+        // make new Ingredient command, set recipeId and add it to the model;
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(recipeCommand.getId());
+        model.addAttribute("ingredient", ingredientCommand);
+
+        return "recipe/ingredient/ingredientForm";
+        }
+
+    // update an ingredient - need to show form with data in it
+    @GetMapping("recipe/{recipeId}/ingredient/{ingredientId}/update")
+    public String updateIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId, Model model){
+        IngredientCommand ingredientCommand = ingredientService.findByRecipeAndIngredientId(recipeId, ingredientId);
+        model.addAttribute("ingredient", ingredientCommand);
+        return "recipe/ingredient/ingredientForm";
+    }
+
+    // post/save a new ingredient - no form
     @PostMapping("recipe/{recipeId}/ingredient/")
     public String saveOrUpdate(@ModelAttribute IngredientCommand ingredientCommand){
         IngredientCommand savedIngredient = ingredientService.saveIngredientCommand(ingredientCommand);
-
+        return "redirect:/recipe/" +savedIngredient.getRecipeId() + "/ingredient/" + savedIngredient.getId() + "show";
         }
 
     // delete an ingredient - get mapping?

@@ -24,7 +24,7 @@ public class IngredientController {
     // list ingredients for a recipe
     @GetMapping("/recipe/{recipeId}/ingredients")
     public String getRecipeIngredients(@PathVariable Long recipeId, Model model){
-        model.addAttribute("ingredients", ingredientService.findIngredientCommandById(recipeId));
+        model.addAttribute("ingredients", recipeService.findByRecipeCommandId(recipeId));
         return "recipe/ingredient/list";
     }
     // show one ingredient
@@ -37,7 +37,7 @@ public class IngredientController {
     // Make a new recipe ingredient - need to show form
     @GetMapping("/recipe/{recipeId}/ingredient/new")
         public String createIngredient(@PathVariable Long recipeId, Model model){
-        RecipeCommand recipeCommand = recipeService.findById(recipeId);
+        RecipeCommand recipeCommand = recipeService.findByRecipeCommandId(recipeId);
 
         // make new Ingredient command, set recipeId and add it to the model;
         IngredientCommand ingredientCommand = new IngredientCommand();

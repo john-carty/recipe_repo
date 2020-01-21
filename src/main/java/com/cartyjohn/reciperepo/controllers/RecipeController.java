@@ -1,11 +1,13 @@
 package com.cartyjohn.reciperepo.controllers;
 
+import com.cartyjohn.reciperepo.commands.RecipeCommand;
 import com.cartyjohn.reciperepo.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class RecipeController {
@@ -28,10 +30,20 @@ public class RecipeController {
         return "recipe/show";
     }
 
-    // forms for these
-    //todo "/recipe/{recipeId}/update"
+    // return form to update existing recipe
+    @GetMapping("/recipe/{recipeId}/update")
+    public String updateRecipe(@PathVariable Long recipeId, Model model){
+        RecipeCommand recipeCommand = recipeService.findByRecipeCommandId(recipeId);
+        model.addAttribute("recipe", recipeCommand);
+        return "recipe/recipeForm";
+    }
 
-    //todo "/recipe/new"
+    // return form to create new recipe
+    @GetMapping("/recipe/new")
+    public String createRecipe(Model model){
+        model.addAttribute("recipe", new RecipeCommand());
+        return "recipe/recipeForm";
+    }
 
 
     @GetMapping("/recipe/{recipeId}/delete")
@@ -40,7 +52,14 @@ public class RecipeController {
         return "redirect:/";
     }
     //todo POST "recipe" - save/update
-
-    // EXCEPTION HANDLER HERE
+    @PostMapping("/recipe")
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "recipe/recipeForm";
+        }
+        RecipeCommand savedRecipe  = recipeService.save(recipeCommand);
+        return "redirect:/recipe/" + savedRecipe.getId() + "/show";
+    }
+    // todo EXCEPTION HANDLER
 }
 

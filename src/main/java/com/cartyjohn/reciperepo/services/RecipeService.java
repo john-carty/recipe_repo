@@ -12,4 +12,5 @@ public interface RecipeService {
     void deleteById(Long recipeId);
     RecipeEntity findById(Long recipeId);
 
+    RecipeCommand save(RecipeCommand recipeCommand);
 }

@@ -1,6 +1,5 @@
 package com.cartyjohn.reciperepo.services;
 
-import com.cartyjohn.reciperepo.commands.IngredientCommand;
 import com.cartyjohn.reciperepo.commands.RecipeCommand;
 import com.cartyjohn.reciperepo.model.RecipeEntity;
 import com.cartyjohn.reciperepo.repositories.RecipeRepository;
@@ -65,6 +64,14 @@ public class RecipeServiceImpl implements RecipeService {
             //todo make better exception
         }
         return recipeEntity.get();
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand save(RecipeCommand recipeCommand) {
+        ModelMapper modelMapper = new ModelMapper();
+        RecipeEntity recipeEntity = recipeRepository.save(modelMapper.map(recipeCommand, RecipeEntity.class));
+        return modelMapper.map(recipeEntity, RecipeCommand.class);
     }
 
 

@@ -82,12 +82,12 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public void deleteById(Long recipeId, Long ingredientId) {
+    // find recipe
 
-    }
+        // if present, find the ingredient in the recipe
 
-    @Override
-    public IngredientCommand findIngredientCommandById(Long recipeId) {
-        return null;
+        // if that is present, set the ingredients recipe to null,
+        // remove from recipes ingredient list and save recipe
     }
 
     @Override

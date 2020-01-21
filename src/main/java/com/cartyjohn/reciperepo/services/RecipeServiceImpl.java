@@ -40,7 +40,8 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeCommand findById(Long recipeId) {
+    @Transactional
+    public RecipeCommand findByRecipeCommandId(Long recipeId) {
         Optional<RecipeEntity> recipeEntity = recipeRepository.findById((recipeId));
         if(!recipeEntity.isPresent()){
             System.out.println("Not found, throw error here.");
@@ -54,6 +55,16 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void deleteById(Long recipeId) {
         recipeRepository.deleteById(recipeId);
+    }
+
+    @Override
+    public RecipeEntity findById(Long recipeId) {
+        Optional<RecipeEntity> recipeEntity = recipeRepository.findById(recipeId);
+        if(!recipeEntity.isPresent()){
+            throw new RuntimeException("RecipeEntity not found");
+            //todo make better exception
+        }
+        return recipeEntity.get();
     }
 
 

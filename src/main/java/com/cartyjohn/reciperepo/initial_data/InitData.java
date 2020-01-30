@@ -49,7 +49,8 @@ private RecipeRepository recipeRepository;
             recipe.setGlutenFree((boolean) jsonRecipe.get("glutenFree"));
             recipe.setKeto((boolean) jsonRecipe.get("ketogenic"));
             recipe.setReadyTime(jsonRecipe.get("readyInMinutes").toString());
-            recipe.setOccasion((String) jsonRecipe.get("occasion"));
+            if(jsonRecipe.get("occasion")!=null)
+                recipe.setOccasion((String) jsonRecipe.get("occasion"));
 
             // get ingredients
             JSONArray jsonIngredients = (JSONArray) jsonRecipe.get("extendedIngredients");

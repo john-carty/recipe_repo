@@ -1,6 +1,8 @@
 package com.cartyjohn.reciperepo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,9 +17,11 @@ public class RecipeEntity implements Serializable {
     private long id;
 
     @Column(nullable= false)
+
     private String description;
 
     @Column(nullable = false)
+    @Size(max=5000)
     private String instructions;
 
     @Column(nullable = false)

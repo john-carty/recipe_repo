@@ -4,6 +4,9 @@ import com.cartyjohn.reciperepo.commands.RecipeCommand;
 import com.cartyjohn.reciperepo.model.RecipeEntity;
 import com.cartyjohn.reciperepo.repositories.RecipeRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -72,6 +75,17 @@ public class RecipeServiceImpl implements RecipeService {
         ModelMapper modelMapper = new ModelMapper();
         RecipeEntity recipeEntity = recipeRepository.save(modelMapper.map(recipeCommand, RecipeEntity.class));
         return modelMapper.map(recipeEntity, RecipeCommand.class);
+    }
+
+    @Override
+    public Set<RecipeEntity> getAllRecipes(Integer pageNumber, Integer numberResults) {
+        Pageable pageable = PageRequest.of(pageNumber, numberResults);
+        Page<RecipeEntity> page = recipeRepository.findAll(pageable);
+        Set<RecipeEntity> recipes = new HashSet<>();
+        for (RecipeEntity recipeEntity : page) {
+            recipes.add(recipeEntity);
+        }
+        return recipes;
     }
 
 

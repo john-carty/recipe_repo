@@ -13,4 +13,6 @@ public interface RecipeService {
     RecipeEntity findById(Long recipeId);
 
     RecipeCommand save(RecipeCommand recipeCommand);
+
+    Set<RecipeEntity> getAllRecipes(Integer pageNumber, Integer numberResults);
 }

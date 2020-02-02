@@ -44,6 +44,7 @@ private RecipeRepository recipeRepository;
             JSONObject jsonRecipe = (JSONObject) obj;
             recipe.setDescription((String) jsonRecipe.get("title"));
             recipe.setInstructions((String) jsonRecipe.get("instructions"));
+            recipe.setImageString((String) jsonRecipe.get("image"));
             recipe.setHealthy((boolean) jsonRecipe.get("veryHealthy"));
             recipe.setVegan((boolean) jsonRecipe.get("vegan"));
             recipe.setGlutenFree((boolean) jsonRecipe.get("glutenFree"));

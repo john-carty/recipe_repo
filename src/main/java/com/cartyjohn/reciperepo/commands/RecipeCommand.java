@@ -1,4 +1,6 @@
 package com.cartyjohn.reciperepo.commands;
+import com.cartyjohn.reciperepo.model.RecipeEntity;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ public class RecipeCommand {
 
     private String occasion = "";
 
+    private String imageString;
     private boolean isHealthy;
     private boolean isGlutenFree;
     private boolean isVegan;
@@ -23,6 +26,9 @@ public class RecipeCommand {
     // add User
     private float rating;
     private Set<IngredientCommand> ingredients;
+
+    private Set<String> tags;
+
     public RecipeCommand() {
     }
 
@@ -114,5 +120,21 @@ public class RecipeCommand {
 
     public void setIngredients(Set<IngredientCommand> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getImageString() {
+        return imageString;
+    }
+
+    public void setImageString(String imageString) {
+        this.imageString = imageString;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
     }
 }

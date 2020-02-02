@@ -17,7 +17,6 @@ public class RecipeEntity implements Serializable {
     private long id;
 
     @Column(nullable= false)
-
     private String description;
 
     @Column(nullable = false)
@@ -29,6 +28,11 @@ public class RecipeEntity implements Serializable {
 
     @Column(nullable = false)
     private String occasion = "";
+
+    @Column
+    private String imageString;
+
+
 
     @Column(nullable = false)
     private boolean isHealthy;
@@ -45,6 +49,8 @@ public class RecipeEntity implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<IngredientEntity> ingredients = new HashSet<>();
+
+    private Set<TagEntity> tags;
 
     public RecipeEntity(){}
 
@@ -136,5 +142,21 @@ public class RecipeEntity implements Serializable {
 
     public void setIngredients(Set<IngredientEntity> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getImageString() {
+        return imageString;
+    }
+
+    public void setImageString(String imageString) {
+        this.imageString = imageString;
+    }
+
+    public Set<TagEntity> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<TagEntity> tags) {
+        this.tags = tags;
     }
 }

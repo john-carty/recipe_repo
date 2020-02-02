@@ -1,0 +1,83 @@
+[33mcommit 0696d91c5a97936ed9049ebf346cee3644843d5a[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: John Carty <jcarty18@outlook.com>
+Date:   Sat Feb 1 15:25:55 2020 -0500
+
+    added pagination to show all recipes closes #8
+
+[33mcommit 13ff57b4a58d86184236777da3265b5291cc6b23[m
+Author: John Carty <jcarty18@outlook.com>
+Date:   Thu Jan 30 18:39:48 2020 -0500
+
+    Added auto-create for tables
+
+[33mcommit ed8cc38b4bee43bd2735ba300997d0fbbc7bd81a[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Thu Jan 23 17:17:12 2020 -0500
+
+    Added UserService UserRepository and UserController
+
+[33mcommit 6556f4e687804f501682be6a2944a92cf688497f[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Wed Jan 22 17:55:00 2020 -0500
+
+    Added UserEntity and User Command closes #5 #4 #3 #2
+
+[33mcommit 1bda061de37bf5c84543b516ff34eeca6a59bdde[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Tue Jan 21 18:49:03 2020 -0500
+
+    Added unit test classes for recipe and ingredient controller
+
+[33mcommit a1ad5bd8417377783636e3f2551a4b2ddcf44504[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Mon Jan 20 19:01:32 2020 -0500
+
+    Added recipe controller methods for delete, put todos in for others
+
+[33mcommit 842529809998774264b0719d5d2c690dac9c8186[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Mon Jan 20 18:22:35 2020 -0500
+
+    Added rest of Ingredient Controller methods and ServiceImpl methods
+
+[33mcommit 3e3cd0dc2a50f70df240658e49a276d4a71a1e79[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Sun Jan 19 11:00:19 2020 -0500
+
+    Added Ingredient controller methods for saveOrUpdate and delete
+
+[33mcommit 827fda62260af078b1b40c5873cff348d95adcc5[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Sat Jan 18 18:54:21 2020 -0500
+
+    Added ingredients to initial data
+
+[33mcommit ded875560f786bb9c6f6762ad25e1db231745020[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Sat Jan 18 18:47:16 2020 -0500
+
+    added Ingredient Service layer save/update method
+
+[33mcommit acdc862459d4629d01ca9df2534dfd8a44f2def5[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Sat Jan 18 14:19:31 2020 -0500
+
+    Added ingredient and ingredientCommand
+
+[33mcommit be56a075532081444d85d2baf699ed3cd15466a8[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Fri Jan 17 20:02:05 2020 -0500
+
+    addrd Recipe Command, Repository, Services
+
+[33mcommit 1a9fa450c65d5b5bceda1800d2d8ede50bd6d4a7[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Fri Jan 17 14:19:32 2020 -0500
+
+    added recipe entity, controllers, command, service interface closes #1
+
+[33mcommit 4041105287f7c787138294bee2eebc321f5c7da7[m
+Author: john-carty <35169715+john-carty@users.noreply.github.com>
+Date:   Thu Jan 16 19:56:36 2020 -0500
+
+    first commit

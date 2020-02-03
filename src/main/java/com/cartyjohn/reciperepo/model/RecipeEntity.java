@@ -50,7 +50,8 @@ public class RecipeEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<IngredientEntity> ingredients = new HashSet<>();
 
-    private Set<TagEntity> tags;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "recipes")
+    private Set<TagEntity> tags = new HashSet<>();
 
     public RecipeEntity(){}
 
@@ -158,5 +159,14 @@ public class RecipeEntity implements Serializable {
 
     public void setTags(Set<TagEntity> tags) {
         this.tags = tags;
+    }
+
+    public void addTag(TagEntity tag){
+        if(tag != null)
+            this.tags.add(tag);
+    }
+    public void removeTag(TagEntity tag){
+        if(tag != null)
+         this.tags.remove(tag);
     }
 }

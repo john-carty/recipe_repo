@@ -3,6 +3,7 @@ package com.cartyjohn.reciperepo.initial_data;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.cartyjohn.reciperepo.model.IngredientEntity;
 import com.cartyjohn.reciperepo.model.RecipeEntity;
+import com.cartyjohn.reciperepo.model.TagEntity;
 import com.cartyjohn.reciperepo.repositories.RecipeRepository;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -50,8 +51,27 @@ private RecipeRepository recipeRepository;
             recipe.setGlutenFree((boolean) jsonRecipe.get("glutenFree"));
             recipe.setKeto((boolean) jsonRecipe.get("ketogenic"));
             recipe.setReadyTime(jsonRecipe.get("readyInMinutes").toString());
-            if(jsonRecipe.get("occasion")!=null)
-                recipe.setOccasion((String) jsonRecipe.get("occasion"));
+            // get occasions and make them tags
+            JSONArray jsonOccasions = (JSONArray) jsonRecipe.get("occasion");
+            if(jsonOccasions != null) {
+                for(Object occasionObj : jsonOccasions){
+                    TagEntity tag = new TagEntity();
+                    tag.setDescription((String) occasionObj);
+                    tag.addRecipe(recipe);
+                    recipe.addTag(tag);
+                }
+            }
+
+            // get cuisunes and make them tags
+            JSONArray jsonCuisines = (JSONArray) jsonRecipe.get("cuisines");
+            if(jsonCuisines != null) {
+                for(Object cuisineObj : jsonCuisines){
+                    TagEntity tag = new TagEntity();
+                    tag.setDescription((String) cuisineObj);
+                    tag.addRecipe(recipe);
+                    recipe.addTag(tag);
+                }
+            }
 
             // get ingredients
             JSONArray jsonIngredients = (JSONArray) jsonRecipe.get("extendedIngredients");

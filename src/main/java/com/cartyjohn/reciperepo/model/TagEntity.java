@@ -16,7 +16,7 @@ public class TagEntity implements Serializable {
     @Column(nullable = false)
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<RecipeEntity> recipes = new HashSet<>();
 
     public TagEntity() {

@@ -5,6 +5,7 @@ import com.cartyjohn.reciperepo.model.IngredientEntity;
 import com.cartyjohn.reciperepo.model.RecipeEntity;
 import com.cartyjohn.reciperepo.model.TagEntity;
 import com.cartyjohn.reciperepo.repositories.RecipeRepository;
+import com.cartyjohn.reciperepo.repositories.TagRepository;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,19 +13,18 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import java.io.FileReader;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.*;
 
 /* Initialize data from a text file containing JSON
 *  on every Context Refresh */
 @Component
 public class InitData implements ApplicationListener<ContextRefreshedEvent> {
 private RecipeRepository recipeRepository;
+private TagRepository tagRepository;
 
-    public InitData(RecipeRepository recipeRepository) {
+    public InitData(RecipeRepository recipeRepository, TagRepository tagRepository) {
         this.recipeRepository = recipeRepository;
+        this.tagRepository = tagRepository;
     }
 
     @Override
@@ -40,6 +40,7 @@ private RecipeRepository recipeRepository;
               parser.parse(new FileReader("C:\\Users\\JCart\\Dropbox\\_U_D_E_M_Y\\JAVA_MASTERCLASS\\recipe-repo\\src\\main\\java\\com\\cartyjohn\\reciperepo\\initial_data\\recipe_json.txt"));
         JSONObject jsonObject = (JSONObject) object;
         JSONArray jsonArray = (JSONArray) jsonObject.get("recipes");
+        Map<String, TagEntity> tagEntities = new HashMap<String, TagEntity>();
         for(Object obj : jsonArray){
             RecipeEntity recipe = new RecipeEntity();
             JSONObject jsonRecipe = (JSONObject) obj;
@@ -52,11 +53,21 @@ private RecipeRepository recipeRepository;
             recipe.setKeto((boolean) jsonRecipe.get("ketogenic"));
             recipe.setReadyTime(jsonRecipe.get("readyInMinutes").toString());
             // get occasions and make them tags
-            JSONArray jsonOccasions = (JSONArray) jsonRecipe.get("occasion");
+            JSONArray jsonOccasions = (JSONArray) jsonRecipe.get("occasions");
             if(jsonOccasions != null) {
                 for(Object occasionObj : jsonOccasions){
-                    TagEntity tag = new TagEntity();
-                    tag.setDescription((String) occasionObj);
+                    String desc = (String)occasionObj;
+                    TagEntity tag;
+                    // if tag is already in hashTable, use that one, else make a new tag
+                    if(tagEntities.containsKey(desc)){
+                        tag= tagEntities.get(desc);
+                    }
+                    else{
+                        tag = new TagEntity();
+                        tag.setDescription(desc);
+                        tagEntities.put(desc, tag);
+                    }
+
                     tag.addRecipe(recipe);
                     recipe.addTag(tag);
                 }
@@ -66,8 +77,18 @@ private RecipeRepository recipeRepository;
             JSONArray jsonCuisines = (JSONArray) jsonRecipe.get("cuisines");
             if(jsonCuisines != null) {
                 for(Object cuisineObj : jsonCuisines){
-                    TagEntity tag = new TagEntity();
-                    tag.setDescription((String) cuisineObj);
+                    String desc = (String)cuisineObj;
+                    TagEntity tag;
+                    // if tag is already in hashTable, use that one, else make a new tag
+                    if(tagEntities.containsKey(desc)){
+                        tag= tagEntities.get(desc);
+                    }
+                    else{
+                        tag = new TagEntity();
+                        tag.setDescription(desc);
+                        tagEntities.put(desc, tag);
+                    }
+
                     tag.addRecipe(recipe);
                     recipe.addTag(tag);
                 }

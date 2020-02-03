@@ -50,7 +50,7 @@ public class RecipeEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<IngredientEntity> ingredients = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "recipes")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "recipes", fetch=FetchType.EAGER)
     private Set<TagEntity> tags = new HashSet<>();
 
     public RecipeEntity(){}

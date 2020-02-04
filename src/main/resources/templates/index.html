@@ -17,46 +17,25 @@
 <!--/*@thymesVar id="recipes" type="java.util.List"*/-->
 <!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
 <div class="container-fluid" style="margin-top: 20px">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
-
-                <div class="panel-heading">
-                    <h1 class="panel-title">My Recipes!</h1>
+    <div class="ft-recipe" th:each="recipe : ${recipes}">
+        <div class="ft-recipe__thumb"><span id="close-modal"><i class="ion ion-md-close"></i></span>
+            <h3>Today's Featured Recipe</h3><img src="https://zippypaws.com/app/uploads/2018/05/strawberry-waffles-1024x668.jpg" alt="Strawberry Waffle"/>
+        </div>
+        <div class="ft-recipe__content">
+            <header class="content__header">
+                <div class="row-wrapper">
+                    <h2 class="recipe-title" th:text="${recipe.description}">Strawberry Waffle</h2>
+                    <div class="user-rating"></div>
                 </div>
-                <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
-                        <table class="table table-hover ">
-                            <thead class="thead-inverse">
-                            <tr>
-                                <th>ID</th>
-                                <th>Description</th>
-                                <th>View</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                            </thead>
-                            <tr th:remove="all">
-                                <td>123</td>
-                                <td>Tasty Goodnees 1</td>
-                                <td><a href="#">View</a></td>
-                            </tr>
-                            <tr th:remove="all">
-                                <td>12333</td>
-                                <td>Tasty Goodnees 2</td>
-                                <td><a href="#">View</a></td>
-                            </tr>
-                            <tr th:each="recipe : ${recipes}">
-                                <td th:text="${recipe.id}">334</td>
-                                <td th:text="${recipe.description}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                <ul class="recipe-details">
+                    <li class="recipe-details-item time" th:text="${recipe.readyTime}"><i class="ion ion-ios-clock-outline"></i><span class="value">20</span><span class="title">Minutes</span></li>
+                    <li class="recipe-details-item ingredients"><i class="ion ion-ios-book-outline"></i><span class="value">5</span><span class="title">Ingredients</span></li>
+                    <li class="recipe-details-item servings"><i class="ion ion-ios-person-outline"></i><span class="value">4-6</span><span class="title">Serving</span></li>
+                </ul>
+            </header>
+            <p class="description">
+                There’s no better way to celebrate May being National Strawberry Month than by sharing a sweet treat with your pup!!! Strawberries...</p>
+            <footer class="content__footer"><a href="#">View Recipe</a></footer>
         </div>
     </div>
 </div>

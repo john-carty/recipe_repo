@@ -19,7 +19,7 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="ft-recipe" th:each="recipe : ${recipes}">
         <div class="ft-recipe__thumb"><span id="close-modal"><i class="ion ion-md-close"></i></span>
-            <h3>Today's Featured Recipe</h3><img src="https://zippypaws.com/app/uploads/2018/05/strawberry-waffles-1024x668.jpg" alt="Strawberry Waffle"/>
+            <h3>Today's Featured Recipe</h3><img th:src="@{${recipe.imageString}}" alt="Strawberry Waffle"/>
         </div>
         <div class="ft-recipe__content">
             <header class="content__header">

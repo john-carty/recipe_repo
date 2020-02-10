@@ -33,6 +33,8 @@ public class RecipeEntity implements Serializable {
     private String imageString;
 
 
+    @Column
+    private Integer servings;
 
     @Column(nullable = false)
     private boolean isHealthy;
@@ -168,5 +170,16 @@ public class RecipeEntity implements Serializable {
     public void removeTag(TagEntity tag){
         if(tag != null)
          this.tags.remove(tag);
+    }
+
+    public Integer getServings() {
+        return servings;
+    }
+
+    public void setServings(Integer servings) {
+        if(servings == null)
+            this.servings = 0;
+        else
+            this.servings = servings;
     }
 }

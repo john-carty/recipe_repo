@@ -53,6 +53,7 @@ private TagRepository tagRepository;
             JSONObject jsonRecipe = (JSONObject) obj;
             recipe.setDescription((String) jsonRecipe.get("title"));
             recipe.setInstructions((String) jsonRecipe.get("instructions"));
+            recipe.setServings((Integer.parseInt(jsonRecipe.get("servings").toString())));
             // get image url
             String imgUrl=((String) jsonRecipe.get("image"));
             // get filename from url

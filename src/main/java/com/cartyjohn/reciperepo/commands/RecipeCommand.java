@@ -10,7 +10,7 @@ public class RecipeCommand {
     private long id;
 
     private String description;
-
+    private Integer servings;
     private String instructions;
 
     private String readyTime;
@@ -136,5 +136,13 @@ public class RecipeCommand {
 
     public void setTags(Set<String> tags) {
         this.tags = tags;
+    }
+
+    public Integer getServings() {
+        return servings;
+    }
+
+    public void setServings(Integer servings) {
+        this.servings = servings;
     }
 }

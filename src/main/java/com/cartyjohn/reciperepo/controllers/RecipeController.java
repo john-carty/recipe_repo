@@ -20,7 +20,7 @@ public class RecipeController {
 
     @GetMapping("/")
     public String getIndexPage(Model model){
-        model.addAttribute("recipes", recipeService.getRecipes());
+        model.addAttribute("recipes", recipeService.getMostRecent9Recipes());
         return "index";
     }
     @GetMapping("/showRecipes/{pageNumber}")

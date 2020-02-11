@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,8 +55,13 @@ public class RecipeEntity implements Serializable {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "recipes", fetch=FetchType.EAGER)
     private Set<TagEntity> tags = new HashSet<>();
+    @Column(nullable = false)
+    private Date createdAt;
+    private Date updatedAt;
+
 
     public RecipeEntity(){}
+
 
     public long getId() {
         return id;
@@ -181,5 +187,31 @@ public class RecipeEntity implements Serializable {
             this.servings = 0;
         else
             this.servings = servings;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
     }
 }

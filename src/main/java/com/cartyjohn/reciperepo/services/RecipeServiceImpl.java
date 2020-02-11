@@ -80,6 +80,17 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public List<RecipeCommand> getMostRecent9Recipes() {
+        ModelMapper modelMapper = new ModelMapper();
+        List<RecipeCommand> recipes = new ArrayList<>();
+        for(RecipeEntity recipeEntity: recipeRepository.findTop9ByOrderByCreatedAtDesc()){
+            RecipeCommand recipeCommand = modelMapper.map(recipeEntity, RecipeCommand.class);
+            recipes.add(0, recipeCommand);
+        }
+        return recipes;
+    }
+
+    @Override
     public Set<RecipeCommand> getAllRecipes(Integer pageNumber, Integer numberResults) {
         ModelMapper modelMapper = new ModelMapper();
         Pageable pageable = PageRequest.of(pageNumber, numberResults);

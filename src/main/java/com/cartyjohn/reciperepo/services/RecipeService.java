@@ -6,7 +6,7 @@ import com.cartyjohn.reciperepo.model.RecipeEntity;
 import java.util.Set;
 
 public interface RecipeService {
-    Set<RecipeEntity> getRecipes();
+    Set<RecipeCommand> getRecipes();
     RecipeCommand saveRecipeCommand(RecipeCommand command);
     RecipeCommand findByRecipeCommandId(Long recipeId);
     void deleteById(Long recipeId);
@@ -14,5 +14,5 @@ public interface RecipeService {
 
     RecipeCommand save(RecipeCommand recipeCommand);
 
-    Set<RecipeEntity> getAllRecipes(Integer pageNumber, Integer numberResults);
+    Set<RecipeCommand> getAllRecipes(Integer pageNumber, Integer numberResults);
 }

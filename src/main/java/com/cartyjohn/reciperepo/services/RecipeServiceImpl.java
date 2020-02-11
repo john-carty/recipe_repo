@@ -22,10 +22,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Set<RecipeEntity> getRecipes() {
-        Set<RecipeEntity> recipes = new HashSet<>();
+    public Set<RecipeCommand> getRecipes() {
+        ModelMapper modelMapper = new ModelMapper();
+        Set<RecipeCommand> recipes = new HashSet<>();
         for (RecipeEntity recipeEntity : recipeRepository.findAll()) {
-            recipes.add(recipeEntity);
+            RecipeCommand recipeCommand = modelMapper.map(recipeEntity, RecipeCommand.class);
+            recipes.add(recipeCommand);
         }
         return recipes;
 
@@ -78,12 +80,14 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Set<RecipeEntity> getAllRecipes(Integer pageNumber, Integer numberResults) {
+    public Set<RecipeCommand> getAllRecipes(Integer pageNumber, Integer numberResults) {
+        ModelMapper modelMapper = new ModelMapper();
         Pageable pageable = PageRequest.of(pageNumber, numberResults);
         Page<RecipeEntity> page = recipeRepository.findAll(pageable);
-        Set<RecipeEntity> recipes = new HashSet<>();
+        Set<RecipeCommand> recipes = new HashSet<>();
         for (RecipeEntity recipeEntity : page) {
-            recipes.add(recipeEntity);
+            RecipeCommand recipeCommand = modelMapper.map(recipeEntity, RecipeCommand.class);
+            recipes.add(recipeCommand);
         }
         return recipes;
     }

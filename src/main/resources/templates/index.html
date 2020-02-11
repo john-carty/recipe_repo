@@ -16,11 +16,11 @@
 </head>
 <body>
 <!--/*@thymesVar id="recipes" type="java.util.List"*/-->
-<!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
-<div class="container-fluid" style="margin-top: 20px">
+<!--/*@thymesVar id="recipe" type="guru.springframework.domain.RecipeCommand"*/-->
+<div class=" recipe-grid-9" style="margin-top: 20px">
     <div class="ft-recipe" th:each="recipe : ${recipes}">
-        <div class="ft-recipe__thumb"><span id="close-modal"><i class="ion ion-md-close"></i></span>
-            <h3>Today's Featured Recipe</h3><img th:src="@{'/img/recipe/'+ ${recipe.imageString}}" alt="Strawberry Waffle"/>
+        <div class="ft-recipe__thumb"></span>
+            <img th:src="@{'/img/recipe/'+ ${recipe.imageString}}" alt="Strawberry Waffle"/>
         </div>
         <div class="ft-recipe__content">
             <header class="content__header">
@@ -29,9 +29,10 @@
                     <div class="user-rating"></div>
                 </div>
                 <ul class="recipe-details">
-                    <li class="recipe-details-item time" th:text="${recipe.readyTime}"><i class="ion ion-ios-clock-outline"></i><span class="value">20</span><span class="title">Minutes</span></li>
-                    <li class="recipe-details-item ingredients"><i class="ion ion-ios-book-outline"></i><span class="value">5</span><span class="title">Ingredients</span></li>
-                    <li class="recipe-details-item servings"><i class="ion ion-ios-person-outline"></i><span class="value">4-6</span><span class="title">Serving</span></li>
+                    <li class="recipe-details-item time" ><i class="ion ion-ios-clock-outline"></i><span class="value" th:text="${recipe.readyTime}">20</span><span class="title">Minutes</span></li>
+                    <li class="recipe-details-item ingredients"><i class="ion ion-ios-book-outline"></i>
+                    <span class="value" th:text="${recipe.numberOfIngredients}">5</span><span class="title">Ingredients</span></li>
+                    <li class="recipe-details-item servings"><i class="ion ion-ios-person-outline"></i><span class="value" th:text="${recipe.servings}">4-6</span><span class="title">Servings</span></li>
                 </ul>
             </header>
             <p class="description">

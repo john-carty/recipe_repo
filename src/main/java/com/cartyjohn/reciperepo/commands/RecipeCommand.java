@@ -2,6 +2,7 @@ package com.cartyjohn.reciperepo.commands;
 import com.cartyjohn.reciperepo.model.RecipeEntity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -12,7 +13,7 @@ public class RecipeCommand {
     private String description;
     private Integer servings;
     private String instructions;
-
+    private Integer numberOfIngredients = 0;
     private String readyTime;
 
     private String occasion = "";
@@ -25,13 +26,12 @@ public class RecipeCommand {
     // add comments
     // add User
     private float rating;
-    private Set<IngredientCommand> ingredients;
+    private Set<IngredientCommand> ingredients = new HashSet<>();
 
     private Set<String> tags;
 
     public RecipeCommand() {
     }
-
 
 
     public String getDescription() {
@@ -144,5 +144,13 @@ public class RecipeCommand {
 
     public void setServings(Integer servings) {
         this.servings = servings;
+    }
+
+    public Integer getNumberOfIngredients() {
+        return this.ingredients.size();
+    }
+
+    public void setNumberOfIngredients(Integer numberOfIngredients) {
+        this.numberOfIngredients = numberOfIngredients;
     }
 }

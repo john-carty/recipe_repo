@@ -25,7 +25,7 @@ public class RecipeController {
     }
     @GetMapping("/showRecipes/{pageNumber}")
         public String getAllRecipes(@PathVariable Integer pageNumber,  Model model){
-        model.addAttribute("recipes", recipeService.getAllRecipes(pageNumber, 10));
+        model.addAttribute("recipes", recipeService.getAllRecipes(pageNumber, 9));
         return "index";
         }
 

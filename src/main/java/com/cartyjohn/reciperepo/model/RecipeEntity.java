@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name="recipes")
@@ -46,6 +47,9 @@ public class RecipeEntity implements Serializable {
     @Column(nullable = false)
     private boolean isKeto;
     // add comments
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe", fetch = FetchType.LAZY)
+    private List<CommentEntity>  comments;
     // add User
     @Column(nullable = false)
     private float rating = 0.0f;
@@ -55,6 +59,7 @@ public class RecipeEntity implements Serializable {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "recipes", fetch=FetchType.EAGER)
     private Set<TagEntity> tags = new HashSet<>();
+
     @Column(nullable = false)
     private Date createdAt;
     private Date updatedAt;

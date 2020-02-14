@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Recipe Form</title>
+
+
+</head>
+<body>
+
+
+
+<!-- hidden id for update here-->
+<input type="hidden"/>
+<label for="title">Title</label>
+<input type="text" name="title">
+<label for="readyTime">Ready Time</label>
+<input type="number" name="readyTime">
+<label for="servings">Servings</label>
+<input type="number" name="servings">
+<legend> Dietary Information </legend>
+<label>Keto</label>
+<input type="checkbox" name="dietInfo" value="isKeto">
+<label>Vegan</label>
+<input type="checkbox" name="dietInfo" value="isVegan">
+<label>Healthy</label>
+<input type="checkbox" name="dietInfo" value="isHealthy">
+<label>Gluten Free</label>
+<input type="checkbox" name="dietInfo" value="isGlutenFree">
+
+
+<textarea name="directions"></textarea>
+
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</form>
+
+
+</body>
+</html>

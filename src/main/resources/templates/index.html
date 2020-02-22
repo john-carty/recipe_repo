@@ -15,8 +15,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-
-<div class=" recipe-grid-9" style="margin-top: 20px">
+<div class="container">
+    <a th:href="@{'/recipe/new'}">Add A Recipe</a>
+</div>
+<div class="recipe-grid-9" style="margin-top: 20px">
     <div class="ft-recipe" th:each="recipe : ${recipes}">
         <div class="ft-recipe__thumb"></span>
             <img th:src="@{'/img/recipe/'+ ${recipe.imageString}}" alt="Strawberry Waffle"/>

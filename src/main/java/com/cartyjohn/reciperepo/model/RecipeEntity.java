@@ -19,6 +19,9 @@ public class RecipeEntity implements Serializable {
     private long id;
 
     @Column(nullable= false)
+    private boolean isSubmitted = false;
+
+    @Column(nullable= false)
     private String description;
 
     @Column(nullable = false)
@@ -74,6 +77,14 @@ public class RecipeEntity implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isSubmitted() {
+        return isSubmitted;
+    }
+
+    public void setSubmitted(boolean submitted) {
+        isSubmitted = submitted;
     }
 
     public String getDescription() {

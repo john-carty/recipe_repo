@@ -10,7 +10,7 @@
 <body>
 <div id="container">
     <div class="form-wrap">
-        <form>
+        <form  th:object="${recipeCommand}" th:action="@{/recipe/}" method="post">
             <!-- hidden id for update here-->
 
             <input type="hidden"/>
@@ -38,7 +38,7 @@
             </div>
 
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Add Ingredients</button>
     </div>
     </form>
 </div>

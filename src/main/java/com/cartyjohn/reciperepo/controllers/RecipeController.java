@@ -56,14 +56,16 @@ public class RecipeController {
         recipeService.deleteById(recipeId);
         return "redirect:/";
     }
-    //todo POST "recipe" - save/update
+
     @PostMapping("/recipe")
     public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "recipe/recipeForm";
+            return "recipe/newRecipeForm";
         }
         RecipeCommand savedRecipe  = recipeService.save(recipeCommand);
-        return "redirect:/recipe/" + savedRecipe.getId() + "/show";
+
+        // send to update to add directions/ingredients
+        return "redirect:/recipe/" + savedRecipe.getId() + "/update";
     }
     // todo EXCEPTION HANDLER
 }

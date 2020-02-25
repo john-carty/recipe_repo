@@ -24,8 +24,8 @@ public class IngredientController {
     // list ingredients for a recipe
     @GetMapping("/recipe/{recipeId}/ingredients")
     public String getRecipeIngredients(@PathVariable Long recipeId, Model model){
-        model.addAttribute("ingredients", recipeService.findByRecipeCommandId(recipeId));
-        return "recipe/ingredient/list";
+        model.addAttribute("recipe", recipeService.findByRecipeCommandId(recipeId));
+        return "recipe/ingredientList";
     }
     // show one ingredient
     @GetMapping("/recipe/{recipeId}/ingredient/{ingredientId}")

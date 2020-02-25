@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Edit Recipe Form</title>
+
+
+</head>
+<body>
+<div id="container">
+    <div class="form-wrap">
+        <form  th:object="${recipeCommand}" th:action="@{/recipe/}" method="patch">
+            <!-- hidden id for update here-->
+
+            <input type="hidden"/>
+            <div class="form-group"> <label for="title">Title</label>
+                <input type="text" name="title"></div>
+            <div class="form-group"><label for="readyTime">Ready Time</label>
+                <input type="number" name="readyTime"></div>
+            <div class="form-group"><label for="servings">Servings</label>
+                <input type="number" name="servings"></div>
+
+
+            <div class="form-group">
+                <legend> Dietary Information </legend>
+                <label>Keto</label>
+                <input type="checkbox" name="dietInfo" value="isKeto">
+                <label>Vegan</label>
+                <input type="checkbox" name="dietInfo" value="isVegan">
+                <label>Healthy</label>
+                <input type="checkbox" name="dietInfo" value="isHealthy">
+                <label>Gluten Free</label>
+                <input type="checkbox" name="dietInfo" value="isGlutenFree">
+            </div>
+            <div class="form-group">
+                <div class="col-md-1">
+                    <a class="form-button" href="#"
+                       th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">Edit Ingredients</a>
+                </div>
+                <ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
+                    <li th:remove="all">Sample Ingredient 1</li>
+                    <li th:remove="all">Sample Ingredient 2</li>
+                    <li th:remove="all">Sample Ingredient 3</li>
+                    <li th:remove="all">Sample Ingredient 4</li>
+                    <li th:each="ingredient : ${recipe.ingredients}"
+                        th:text="TODO">1 Teaspoon of Sugar
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group"><label for="directions">Directions</label>
+                <textarea name="directions"></textarea>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Save Recipe</button>
+    </div>
+    </form>
+</div>
+</div>
+
+
+
+</body>
+</html>

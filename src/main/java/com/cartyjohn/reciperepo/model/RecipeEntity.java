@@ -24,7 +24,7 @@ public class RecipeEntity implements Serializable {
     @Column(nullable= false)
     private String description;
 
-    @Column(nullable = false)
+
     @Size(max=5000)
     private String instructions;
 

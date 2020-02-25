@@ -40,7 +40,7 @@ public class RecipeController {
     public String updateRecipe(@PathVariable Long recipeId, Model model){
         RecipeCommand recipeCommand = recipeService.findByRecipeCommandId(recipeId);
         model.addAttribute("recipe", recipeCommand);
-        return "recipe/recipeForm";
+        return "forms/recipeEditForm";
     }
 
     // return form to create new recipe
@@ -58,7 +58,7 @@ public class RecipeController {
     }
 
     @PostMapping("/recipe")
-    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult){
+    public String saveORecipe(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "recipe/newRecipeForm";
         }
@@ -68,5 +68,15 @@ public class RecipeController {
         return "redirect:/recipe/" + savedRecipe.getId() + "/update";
     }
     // todo EXCEPTION HANDLER
+    @PatchMapping("/recipe")
+    public String updateRecipe(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "recipe/RecipeEditForm";
+        }
+        RecipeCommand savedRecipe  = recipeService.save(recipeCommand);
+
+        // send to update to add directions/ingredients
+        return "redirect:/recipe/" + savedRecipe.getId() + "/show";
+    }
 }
 

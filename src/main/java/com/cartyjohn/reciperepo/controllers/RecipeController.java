@@ -38,8 +38,10 @@ public class RecipeController {
     // return form to update existing recipe
     @GetMapping("/recipe/{recipeId}/update")
     public String updateRecipe(@PathVariable Long recipeId, Model model){
+        System.out.println(recipeId);
         RecipeCommand recipeCommand = recipeService.findByRecipeCommandId(recipeId);
         model.addAttribute("recipe", recipeCommand);
+        System.out.println(recipeCommand.getId());
         return "forms/recipeEditForm";
     }
 

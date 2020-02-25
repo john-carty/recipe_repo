@@ -46,15 +46,18 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @Transactional
     public RecipeCommand findByRecipeCommandId(Long recipeId) {
-        Optional<RecipeEntity> recipeEntity = recipeRepository.findById((recipeId));
-        if(!recipeEntity.isPresent()){
+        System.out.println("Id" + recipeId);
+        Optional<RecipeEntity> recipeOptional = recipeRepository.findById(recipeId);
+        if(!recipeOptional.isPresent()){
             System.out.println("Not found, throw error here.");
-        }
-        ModelMapper modelMapper = new ModelMapper();
-        RecipeCommand recipeCommand = modelMapper.map(recipeEntity, RecipeCommand.class);
+        }else {
+            ModelMapper modelMapper = new ModelMapper();
+            RecipeCommand recipeCommand = modelMapper.map(recipeOptional.get(), RecipeCommand.class);
 
-        return recipeCommand;
-    }
+            return recipeCommand;
+        }
+        return null;
+        }
 
     @Override
     public void deleteById(Long recipeId) {

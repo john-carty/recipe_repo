@@ -10,6 +10,7 @@ import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.print.attribute.standard.PresentationDirection;
 import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.Set;
@@ -83,11 +84,25 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public void deleteById(Long recipeId, Long ingredientId) {
     // find recipe
-
+    Optional<RecipeEntity> recipeOptional = recipeRepository.findById(recipeId);
         // if present, find the ingredient in the recipe
-
+    if(recipeOptional.isPresent()){
         // if that is present, set the ingredients recipe to null,
+        RecipeEntity recipeEntity = recipeOptional.get();
         // remove from recipes ingredient list and save recipe
+        for(IngredientEntity ingredient : recipeEntity.getIngredients()){
+            if(ingredient.getId() == ingredientId){
+                ingredient.setRecipe(null);
+                recipeEntity.getIngredients().remove(ingredient);
+                recipeRepository.save(recipeEntity);
+                break;
+            }
+        }
+
+    }
+     else{
+         System.out.println("Recipe Not found");
+    }
     }
 
     @Override

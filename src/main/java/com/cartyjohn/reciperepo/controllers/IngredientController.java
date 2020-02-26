@@ -38,13 +38,13 @@ public class IngredientController {
     @GetMapping("/recipe/{recipeId}/ingredient/new")
         public String createIngredient(@PathVariable Long recipeId, Model model){
         RecipeCommand recipeCommand = recipeService.findByRecipeCommandId(recipeId);
-
+        // TODO THROW EXCEPTION IF NULL
         // make new Ingredient command, set recipeId and add it to the model;
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setRecipeId(recipeCommand.getId());
         model.addAttribute("ingredient", ingredientCommand);
 
-        return "recipe/ingredient/ingredientForm";
+        return "forms/ingredientForm";
         }
 
     // update an ingredient - need to show form with data in it
@@ -52,14 +52,14 @@ public class IngredientController {
     public String updateIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId, Model model){
         IngredientCommand ingredientCommand = ingredientService.findByRecipeAndIngredientId(recipeId, ingredientId);
         model.addAttribute("ingredient", ingredientCommand);
-        return "recipe/ingredient/ingredientForm";
+        return "forms/ingredientForm";
     }
 
     // post/save a new ingredient - no form
-    @PostMapping("recipe/{recipeId}/ingredient/")
+    @PostMapping("recipe/{recipeId}/ingredient")
     public String saveOrUpdate(@ModelAttribute IngredientCommand ingredientCommand){
         IngredientCommand savedIngredient = ingredientService.saveIngredientCommand(ingredientCommand);
-        return "redirect:/recipe/" +savedIngredient.getRecipeId() + "/ingredient/" + savedIngredient.getId() + "show";
+        return "redirect:/recipe/" + ingredientCommand.getRecipeId() + "/ingredients";
         }
 
     // delete an ingredient - get mapping?

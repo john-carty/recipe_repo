@@ -42,7 +42,7 @@ public class IngredientServiceImpl implements IngredientService {
             IngredientEntity ingredientEntity = null;
             // search for ingredient
             for(IngredientEntity ingredient : recipeEntity.getIngredients()){
-                if(ingredient.getId() == command.getId()){
+                if(ingredient.getId().equals(command.getId())){
                     ingredientEntity=ingredient;
                     break;
                 }
@@ -55,19 +55,20 @@ public class IngredientServiceImpl implements IngredientService {
             }
             else{
                 // not found - add new ingredient
-                IngredientEntity newIngredient = modelMapper.map(command, IngredientEntity.class);
+                 ingredientEntity = modelMapper.map(command, IngredientEntity.class);
                 ingredientEntity.setRecipe(recipeEntity);
                 recipeEntity.getIngredients().add(ingredientEntity);
             }
 
             // now save recipe
             RecipeEntity savedRecipe = recipeRepository.save(recipeEntity);
-
             // find saved ingredient and send back command
             IngredientEntity savedIngredient = null;
             for(IngredientEntity ingredient : savedRecipe.getIngredients()){
-                if(ingredient.getId() == command.getId()){
+                if(ingredient.getId().equals(command.getId())){
                     // found
+                    System.out.println(" ingredientid= " + ingredient.getId());
+                    System.out.println("command id = " + command.getId());
                     savedIngredient = ingredient;
                     break;
                 }
@@ -121,7 +122,7 @@ public class IngredientServiceImpl implements IngredientService {
         //find and return the ingredient
         IngredientEntity ingredientEntity = null;
         for(IngredientEntity ingredient : recipeEntity.getIngredients()){
-            if(ingredient.getId() == ingredientId){
+            if(ingredient.getId().equals(ingredientId)){
                 ingredientEntity = ingredient;
                 break;
             }

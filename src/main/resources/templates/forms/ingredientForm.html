@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Ingredient Form</title>
+
+
+</head>
+<body>
+<div id="container">
+    <div class="form-wrap">
+        <form th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} " method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group">
+                <label for="amount" >Amount</label>
+                <input name="amount" type="text" class="form-control" th:field="${ingredient.amount}"/>
+            </div>
+            <div class="form-group">
+                <label for="description" >Description</label>
+                <input name="description" type="text" class="form-control" th:field="${ingredient.description}"/>
+            </div>
+            <button type="submit">Submit</button>
+    </form>
+</div>
+</div>
+
+
+
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -100,6 +101,17 @@ public class RecipeServiceImpl implements RecipeService {
         Page<RecipeEntity> page = recipeRepository.findAll(pageable);
         Set<RecipeCommand> recipes = new HashSet<>();
         for (RecipeEntity recipeEntity : page) {
+            RecipeCommand recipeCommand = modelMapper.map(recipeEntity, RecipeCommand.class);
+            recipes.add(recipeCommand);
+        }
+        return recipes;
+    }
+
+    @Override
+    public List<RecipeCommand> getHealthyRecipes() {
+        ModelMapper modelMapper = new ModelMapper();
+        List<RecipeCommand> recipes = new ArrayList<>();
+        for(RecipeEntity recipeEntity : recipeRepository.findTop4ByIsHealthyTrue()){
             RecipeCommand recipeCommand = modelMapper.map(recipeEntity, RecipeCommand.class);
             recipes.add(recipeCommand);
         }

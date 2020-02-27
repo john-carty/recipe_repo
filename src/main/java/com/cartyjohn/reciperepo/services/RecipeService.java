@@ -16,4 +16,6 @@ public interface RecipeService {
     RecipeCommand save(RecipeCommand recipeCommand);
     List<RecipeCommand> getMostRecent9Recipes();
     Set<RecipeCommand> getAllRecipes(Integer pageNumber, Integer numberResults);
+
+    List<RecipeCommand> getHealthyRecipes();
 }

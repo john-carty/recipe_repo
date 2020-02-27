@@ -15,6 +15,7 @@ public interface RecipeRepository extends PagingAndSortingRepository<RecipeEntit
     Page<RecipeEntity> findAll(Pageable pageable);
     Optional<RecipeEntity> findById(Long id);
     List<RecipeEntity> findTop9ByOrderByCreatedAtDesc();
+    List<RecipeEntity> findTop4ByIsHealthyTrue();
 
 
 

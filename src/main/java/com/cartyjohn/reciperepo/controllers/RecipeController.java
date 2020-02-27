@@ -21,6 +21,7 @@ public class RecipeController {
     @GetMapping("/")
     public String getIndexPage(Model model){
         model.addAttribute("recipes", recipeService.getMostRecent9Recipes());
+        model.addAttribute("healthyRecipes", recipeService.getHealthyRecipes());
         return "index";
     }
     @GetMapping("/showRecipes/{pageNumber}")

@@ -15,6 +15,24 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
+<nav class="main-nav">
+    <div class="container">
+        <h1 id="logo"><span>Recipes</span></h1>
+        <div class="categories">
+            <ul>
+                <li>Top 5</li>
+                <li>Healthy</li>
+                <li>Vegan</li>
+            </ul>
+        </div>
+        <div class="login">
+            <ul>
+                <li>Login</li>
+                <li>Sign Up</li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <a th:href="@{'/recipe/new'}">Add A Recipe</a>
 </div>
